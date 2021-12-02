@@ -6,17 +6,17 @@
 
 (def input (map #(Integer/parseInt %) (str/split (slurp "input") #"\n")))
 
-(defn increased?
+(defn change
   [x y]
   (if (> y x)
-    :increased
-    :decreased))
+    1
+    0))
 
 ;; Part 1
 
 (defn part1
   [input]
-(count (filter #(= :increased %) (map increased? (drop-last input) (rest input)))))
+(reduce + (map change (drop-last input) (rest input))))
 
 ;; (part1 sample)
 
