@@ -7,7 +7,7 @@
 (def input (map #(Integer/parseInt %) (str/split (slurp "input") #"\n")))
 
 (defn change
-  [x y]
+  [[x y]]
   (if (> y x)
     1
     0))
@@ -16,7 +16,7 @@
 
 (defn part1
   [input]
-(reduce + (map change (drop-last input) (rest input))))
+(reduce + (map change (partition 2 1 input))))
 
 ;; (part1 sample)
 
