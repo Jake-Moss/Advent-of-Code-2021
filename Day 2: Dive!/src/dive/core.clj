@@ -15,9 +15,9 @@
 
 (defn move [pos [direction x]]
   (case direction
-    "down" (update pos :depth + x))
+    "down" (update pos :depth + x)
     "up" (update pos :depth - x)
-    "forward" (update pos :horizontal + x))
+    "forward" (update pos :horizontal + x)))
 
 (defn part1 [text]
   (reduce * (vals (reduce move {:depth 0 :horizontal 0} text))))
@@ -31,9 +31,9 @@
 
 (defn move2 [pos [direction x]]
   (case direction
-    "down" (update pos :aim + x))
+    "down" (update pos :aim + x)
     "up" (update pos :aim - x)
-    "forward" (update (update pos :horizontal + x) :depth + (* (:aim pos) x)))
+    "forward" (update (update pos :horizontal + x) :depth + (* (:aim pos) x))))
 
 (defn part2 [text]
   (reduce * (vals (dissoc (reduce move2 {:depth 0 :horizontal 0 :aim 0} text) :aim))))
