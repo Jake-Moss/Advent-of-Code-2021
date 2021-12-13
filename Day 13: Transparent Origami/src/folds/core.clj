@@ -14,17 +14,10 @@
   (map (fn [pair] (map #(Integer/parseInt %) (str/split pair #",")))
        (str/split (first (str/split data #"\n\n")) #"\n")))
 
-(defn foldY [line [x y]]
-  [x (- line (Math/abs (- y line)))])
-
-
-(defn foldX [line [x y]]
-  [(- line (Math/abs (- x line))) y])
-
 (defn fold [[dir line] point]
   (case dir
-    \x (foldX line point)
-    \y (foldY line point)))
+    \x [(- line (Math/abs (- x line))) y]
+    \y [x (- line (Math/abs (- y line)))]))
 
 
 ;; Part 1
@@ -33,7 +26,7 @@
         points (parse-points data)]
     (count (set (map #(fold (first folds) %) points)))))
 
-(part1 input)
+(println (part1 input))
 
 
 ;; Part 2
@@ -54,4 +47,4 @@
 (defn part2 [data]
  (print (apply str (flatten (make-grid (apply-folds input))))))
 
-(part2 input)
+(println (part2 input))
